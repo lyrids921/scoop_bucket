@@ -1,13 +1,13 @@
 {
-    "version": "11.3.3.853",
+    "version": "11.3.4.854",
     "description": "Free Disk Cleanup and Defragment Tool.",
     "homepage": "https://www.wisecleaner.com",
     "license": "Proprietary",
     "architecture": {
         "64bit": {
-            "url": "https://downloads.wisecleaner.com/soft/WDCFree_11.3.3.853.zip",
-            "hash": "06012688d5c259a038902b16b598dd3bd08e36b37cacd20f47d998719607c6de",
-            "extract_dir": "WDCFree_11.3.3.853"
+            "url": "https://downloads.wisecleaner.com/soft/WDCFree_11.3.4.854.zip",
+            "hash": "5d62552232c9e843be52a60c699ee44d5ae73481d76e13fd97857020c191cc7f",
+            "extract_dir": "WDCFree_11.3.4.854"
         }
     },
     "shortcuts": [
