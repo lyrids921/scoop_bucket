@@ -13,7 +13,6 @@
             "hash": "2fe227dbed39b67101997c5d01ab54156cc7814a5a4036c1a026f358ecee8917"
         }
     },
-    "pre_install": "Rename-Item \"$dir\\elvish-v$version.exe\" 'elvish.exe'",
     "bin": "elvish.exe",
     "checkver": {
         "url": "https://elv.sh/get/",
