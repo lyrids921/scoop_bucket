@@ -1,0 +1,35 @@
+{
+  "version": "1.3.133",
+  "description": "noctty is a Windows terminal emulator that reuses Ghostty's terminal core under a native Win32 front end.",
+  "homepage": "https://github.com/amanthanvi/noctty",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/amanthanvi/noctty/releases/download/v1.3.133/noctty-1.3.133-windows-x64-portable.zip",
+      "hash": "aa7e1a42f95c5dec370c42d0b6e98d50c89ca1a273a0198e5d97c2901b5675f4"
+    },
+    "arm64": {
+      "url": "https://github.com/amanthanvi/noctty/releases/download/v1.3.133/noctty-1.3.133-windows-arm64-portable.zip",
+      "hash": "ec9daeba11f63de7ee96fbd8f7ae9db3bf34dd31ea90a1945e0125cc43fc9484"
+    }
+  },
+  "extract_dir": "noctty",
+  "bin": "noctty.exe",
+  "pre_uninstall": [
+    "if ($cmd -eq 'uninstall') {",
+    "    $apps = [IO.Path]::GetFullPath((Split-Path -Parent $dir)) + '\\'",
+    "    $noctty = Join-Path $dir 'noctty.com'",
+    "    $running = @(Get-Process | Where-Object { $_.Path -and $_.Path.StartsWith($apps, [StringComparison]::OrdinalIgnoreCase) })",
+    "    $key = Get-Item -LiteralPath 'HKCU:\\Software\\Classes\\CLSID\\{33368C6F-D328-410C-B225-26DC9F12C728}\\LocalServer32' -ErrorAction Ignore",
+    "    $registered = if ($key) { $key.GetValue('') }",
+    "    $registeredPath = if ($registered) { try { [IO.Path]::GetFullPath($registered.Trim('\"')) } catch { '' } }",
+    "    $mine = $registeredPath -and $registeredPath.StartsWith($apps, [StringComparison]::OrdinalIgnoreCase)",
+    "    if ($running.Count -eq 0 -and $mine -and (Test-Path -LiteralPath $noctty -PathType Leaf)) {",
+    "        try {",
+    "            & $noctty '+unregister-default-terminal' | Out-Null",
+    "            if ($LASTEXITCODE -ne 0) { Write-Host \"noctty: could not unregister the default terminal (exit code $LASTEXITCODE)\" }",
+    "        } catch { Write-Host \"noctty: could not unregister the default terminal ($($_.Exception.Message))\" }",
+    "    }",
+    "}"
+  ]
+}
